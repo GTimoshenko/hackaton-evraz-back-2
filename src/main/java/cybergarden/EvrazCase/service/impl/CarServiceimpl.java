@@ -1,6 +1,7 @@
 package cybergarden.EvrazCase.service.impl;
 
 import cybergarden.EvrazCase.DTO.CarDTO;
+import cybergarden.EvrazCase.DTO.CarWagonDTO;
 import cybergarden.EvrazCase.entity.*;
 import cybergarden.EvrazCase.exception.car.CarNotFoundByIdException;
 import cybergarden.EvrazCase.exception.company.CompanyNotFoundByIdException;
@@ -26,18 +27,24 @@ public class CarServiceimpl implements CarService {
     private final CompanyRepo companyRepo;
     private final HeadTypeRepo headTypeRepo;
     private final TrackRepo trackRepo;
+    private final CarWagonRepo carWagonRepo;
+    private final WagonRepo wagonRepo;
 
     @Autowired
     public CarServiceimpl(CarRepo carRepo,
                           DestRepo destRepo,
                           CompanyRepo companyRepo,
                           HeadTypeRepo headTypeRepo,
-                          TrackRepo trackRepo) {
+                          TrackRepo trackRepo,
+                          CarWagonRepo carWagonRepo,
+                          WagonRepo wagonRepo) {
         this.carRepo = carRepo;
         this.destRepo = destRepo;
         this.companyRepo = companyRepo;
         this.headTypeRepo = headTypeRepo;
         this.trackRepo = trackRepo;
+        this.carWagonRepo = carWagonRepo;
+        this.wagonRepo = wagonRepo;
     }
 
     @Override
@@ -115,15 +122,14 @@ public class CarServiceimpl implements CarService {
         if(car == null) {
             throw new CarNotFoundByIdException("Состава с таким ID не найдено.");
         }
-
         return carRepo.findById(carId).get();
     }
 
     private CarEntity parseCar(CarEntity car, CarEntity updCar) {
-        car.setCompany(updCar.getCompany() == car.getCompany() ? car.getCompany() : updCar.getCompany());
-        car.setDest(updCar.getDest() == car.getDest() ? car.getDest() : updCar.getDest());
-        car.setTrack(updCar.getTrack() == car.getTrack() ? car.getTrack() : updCar.getTrack());
-        car.setHeadType(updCar.getHeadType() == car.getHeadType() ? car.getHeadType() : updCar.getHeadType());
+        car.setCompany(updCar.getCompany() == null ? car.getCompany() : updCar.getCompany());
+        car.setDest(updCar.getDest() == null ? car.getDest() : updCar.getDest());
+        car.setTrack(updCar.getTrack() == null ? car.getTrack() : updCar.getTrack());
+        car.setHeadType(updCar.getHeadType() == null ? car.getHeadType() : updCar.getHeadType());
         return car;
     }
 }

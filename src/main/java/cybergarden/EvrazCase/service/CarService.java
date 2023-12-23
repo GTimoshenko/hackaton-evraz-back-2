@@ -2,6 +2,8 @@ package cybergarden.EvrazCase.service;
 
 import cybergarden.EvrazCase.DTO.CarDTO;
 import cybergarden.EvrazCase.entity.CarEntity;
+import cybergarden.EvrazCase.entity.CarWagonEntity;
+import cybergarden.EvrazCase.entity.WagonEntity;
 import cybergarden.EvrazCase.exception.car.CarNotFoundByIdException;
 import cybergarden.EvrazCase.exception.company.CompanyNotFoundByIdException;
 import cybergarden.EvrazCase.exception.destination.DestinationNotFoundByIdException;
@@ -21,7 +23,5 @@ public interface CarService {
     List<CarEntity> getAllCars();
     CarEntity updateCar(CarEntity car, Long carId) throws CarNotFoundByIdException;
     void deleteCar(Long carId) throws CarNotFoundByIdException;
-
-
     CarEntity getCar(Long carId) throws CarNotFoundByIdException;
 }

@@ -14,7 +14,7 @@ public class CarWagonEntity {
     private Long position;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "car")
     private CarEntity car;
 
     @JoinColumn(name = "wagon_id")
